@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Slow-rise squishies, packed in a matte black box.">
+<title>Blackbox Squishies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a matte black box you open — pastel squishies glow inside it. Dark by design. */
+:root {
+  --box: #141118;       /* plum-black ground */
+  --box-2: #1d1923;     /* raised surface */
+  --box-3: #27212f;     /* hover / inset */
+  --line: #332b3c;
+  --ink: #f7eff5;
+  --muted: #a89cb1;
+  --milk: #ffb8d9;      /* strawberry-milk accent */
+  --milk-ink: #2a1020;
+  --mint: #b9f0d6;
+  --display: "Bagel Fat One", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--box);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--box); }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.02; letter-spacing: -0.01em; }
+p { margin: 0; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--milk); outline-offset: 3px; border-radius: 8px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+/* Header */
+header.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--box) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.logo-cube { width: 30px; height: 30px; border-radius: 9px; background: #000; border: 1.5px solid var(--line); display: grid; place-items: center; }
+.logo-cube span { width: 12px; height: 9px; border-radius: 50% 50% 45% 45%; background: var(--milk); }
+.logo b { font-family: var(--display); font-weight: 400; font-size: 20px; letter-spacing: 0.01em; }
+nav.links { display: flex; gap: 24px; }
+nav.links a { color: var(--muted); text-decoration: none; font-weight: 500; font-size: 15px; }
+nav.links a:hover { color: var(--ink); }
+.cart-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--box-2); border: 1px solid var(--line); border-radius: 999px;
+  padding: 8px 14px 8px 12px; font-weight: 600; font-size: 15px;
+}
+.cart-btn:hover { background: var(--box-3); }
+.cart-count { min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--milk); color: var(--milk-ink); font-size: 12px; font-weight: 700; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.cart-count.bump { animation: bump .45s ease; }
+@keyframes bump { 40% { transform: scale(1.35, .8); } 70% { transform: scale(.9, 1.1); } }
+
+/* Hero */
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 40px; align-items: center; padding-block: 64px 56px; }
+.hero h1 { font-size: clamp(46px, 7.4vw, 96px); }
+.hero h1 em { font-style: normal; color: var(--milk); }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero-copy p.lede { font-size: 18px; color: var(--muted); max-width: 46ch; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { border: 0; border-radius: 999px; padding: 14px 24px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: transform .15s ease, background .15s ease; }
+.btn:active { transform: scale(.96, .92); }
+.btn-milk { background: var(--milk); color: var(--milk-ink); }
+.btn-milk:hover { background: #ffc9e2; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn-ghost:hover { background: var(--box-2); }
+.hero-stats { display: flex; flex-wrap: wrap; gap: 28px; padding-top: 6px; }
+.hero-stats div { display: grid; }
+.hero-stats b { font-family: var(--mono); font-weight: 500; font-size: 22px; font-variant-numeric: tabular-nums; }
+.hero-stats span { font-size: 13px; color: var(--muted); }
+
+.stage {
+  position: relative; aspect-ratio: 1 / 1; max-width: 100%; width: 100%; max-height: 520px;
+  border-radius: 36px; background: radial-gradient(circle at 50% 62%, #2b2134 0%, #17131c 62%, #0f0c12 100%);
+  border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; justify-self: center;
+}
+.stage::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: 13%; height: 7%; border-radius: 50%; background: rgba(0,0,0,.55); filter: blur(10px); }
+.hero-squish { width: 72%; position: relative; z-index: 1; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.hero-squish svg { display: block; width: 100%; height: auto; transform-origin: 50% 88%; }
+.stage-hint { position: absolute; z-index: 2; top: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; gap: 12px; }
+.chip { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid var(--line); color: var(--muted); white-space: nowrap; }
+.chip.live { color: var(--mint); font-variant-numeric: tabular-nums; }
+
+/* Ticker of materials */
+.ticker { border-block: 1px solid var(--line); overflow: hidden; background: var(--box-2); }
+.ticker-track { display: flex; gap: 40px; width: max-content; padding-block: 14px; animation: slide 38s linear infinite; }
+.ticker span { font-family: var(--mono); font-size: 13px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+.ticker span::before { content: "●"; color: var(--milk); margin-right: 12px; font-size: 9px; vertical-align: 2px; }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* Shop */
+section { scroll-margin-top: 80px; }
+.shop .wrap { padding-block: 80px 40px; display: grid; gap: 28px; }
+.shop-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
+.shop-head h2 { font-size: clamp(36px, 5vw, 58px); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter { background: transparent; border: 1.5px solid var(--line); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: 14px; color: var(--muted); }
+.filter:hover { color: var(--ink); }
+.filter[aria-pressed="true"] { background: var(--ink); color: var(--box); border-color: var(--ink); }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.card { background: var(--box-2); border: 1px solid var(--line); border-radius: 26px; padding: 14px 14px 18px; display: grid; gap: 14px; align-content: start; }
+.card-art { position: relative; aspect-ratio: 1 / 1; max-width: 100%; border-radius: 18px; display: grid; place-items: center; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.card-art svg { width: 78%; height: auto; transform-origin: 50% 88%; display: block; }
+.card-art .tag { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: rgba(20,17,24,.75); color: var(--ink); }
+.card-body { display: grid; gap: 10px; padding-inline: 4px; }
+.card-title { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.card-title h3 { font-family: var(--body); font-weight: 700; font-size: 17px; line-height: 1.25; }
+.price { font-family: var(--mono); font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.specs { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; font-size: 13px; color: var(--muted); }
+.specs dt { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.specs dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
+.soft { display: inline-flex; gap: 3px; vertical-align: middle; }
+.soft i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: block; }
+.soft i.on { background: var(--milk); }
+.add { width: 100%; border: 1.5px solid var(--line); background: transparent; border-radius: 999px; padding: 10px; font-weight: 700; font-size: 14px; transition: background .15s ease, color .15s ease; }
+.add:hover { background: var(--milk); color: var(--milk-ink); border-color: var(--milk); }
+.add.added { background: var(--mint); color: #0f2a1e; border-color: var(--mint); }
+
+/* Blackbox mystery */
+.mystery .wrap { padding-block: 60px 80px; }
+.mbox { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: #000; border: 1px solid var(--line); border-radius: 36px; padding: clamp(24px, 4vw, 56px); }
+.mbox-copy { display: grid; gap: 18px; min-width: 0; }
+.mbox-copy h2 { font-size: clamp(36px, 5vw, 60px); }
+.mbox-copy p { color: var(--muted); max-width: 44ch; }
+.odds { display: grid; gap: 8px; font-size: 14px; }
+.odds div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 8px; }
+.odds b { font-family: var(--mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+.cube-zone { position: relative; display: grid; place-items: center; min-height: 360px; }
+.cube { position: relative; width: min(260px, 70vw); aspect-ratio: 1 / 1; max-width: 100%; }
+.cube-body { position: absolute; inset: 28% 0 0 0; background: linear-gradient(180deg, #1a1620, #0d0b10); border: 1.5px solid #3a3144; border-radius: 22px; display: grid; place-items: center; z-index: 2; }
+.cube-body span { font-family: var(--display); font-size: 22px; color: #3a3144; letter-spacing: .02em; }
+.cube-lid { position: absolute; left: -4%; right: -4%; top: 18%; height: 16%; background: linear-gradient(180deg, #2a2331, #1a1620); border: 1.5px solid #3a3144; border-radius: 16px; z-index: 3; transform-origin: 8% 100%; transition: transform .7s cubic-bezier(.3,1.5,.5,1); }
+.cube.open .cube-lid { transform: translate(-6%, -70%) rotate(-24deg); }
+.reveal { position: absolute; left: 12%; right: 12%; top: 0; z-index: 1; transform: translateY(45%) scale(.6); opacity: 0; transition: transform .8s cubic-bezier(.3,1.6,.5,1) .15s, opacity .3s ease .15s; }
+.reveal svg { width: 100%; height: auto; display: block; }
+.cube.open .reveal { transform: translateY(-38%) scale(1); opacity: 1; }
+.reveal-name { position: absolute; bottom: -8px; left: 0; right: 0; text-align: center; font-weight: 700; min-height: 1.5em; }
+.reveal-name small { display: block; font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--muted); letter-spacing: .06em; }
+.mbox-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Squish guide */
+.guide .wrap { padding-block: 20px 90px; display: grid; gap: 28px; }
+.guide h2 { font-size: clamp(32px, 4.4vw, 50px); }
+.guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.guide-item { border-top: 2px solid var(--line); padding-top: 18px; display: grid; gap: 8px; }
+.guide-item h3 { font-family: var(--body); font-weight: 700; font-size: 18px; }
+.guide-item p { color: var(--muted); font-size: 15px; }
+.scale { display: flex; gap: 6px; flex-wrap: wrap; padding-top: 4px; }
+.scale span { font-family: var(--mono); font-size: 12px; padding: 4px 8px; border-radius: 8px; background: var(--box-2); border: 1px solid var(--line); }
+
+footer { border-top: 1px solid var(--line); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-block: 28px; color: var(--muted); font-size: 14px; }
+footer b { font-family: var(--display); font-weight: 400; color: var(--ink); font-size: 18px; }
+
+/* Cart drawer */
+.scrim { position: fixed; inset: 0; background: rgba(5,3,8,.6); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+.scrim.show { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 50; width: min(420px, 100%);
+  background: var(--box-2); border-left: 1px solid var(--line);
+  transform: translateX(105%); transition: transform .35s cubic-bezier(.2,.9,.2,1);
+  display: grid; grid-template-rows: auto 1fr auto;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); padding-right: env(safe-area-inset-right, 0px);
+}
+.drawer.show { transform: none; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 20px 22px; border-bottom: 1px solid var(--line); }
+.drawer-head h2 { font-size: 28px; }
+.x { background: var(--box-3); border: 0; width: 36px; height: 36px; border-radius: 50%; font-size: 18px; line-height: 1; }
+.items { overflow-y: auto; padding: 12px 22px; display: grid; gap: 12px; align-content: start; }
+.line { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; align-items: center; padding-block: 8px; border-bottom: 1px solid var(--line); }
+.line-art { width: 64px; height: 64px; border-radius: 14px; display: grid; place-items: center; }
+.line-art svg { width: 80%; height: auto; }
+.line-info { min-width: 0; display: grid; gap: 4px; }
+.line-info b { font-size: 15px; }
+.qty { display: inline-flex; align-items: center; gap: 4px; }
+.qty button { width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--line); background: transparent; line-height: 1; }
+.qty span { min-width: 22px; text-align: center; font-family: var(--mono); font-size: 14px; }
+.line .price { align-self: start; padding-top: 6px; }
+.empty { text-align: center; color: var(--muted); padding: 40px 10px; display: grid; gap: 12px; justify-items: center; }
+.empty svg { width: 110px; opacity: .9; }
+.drawer-foot { padding: 18px 22px 22px; border-top: 1px solid var(--line); display: grid; gap: 14px; }
+.ship { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+.bar { height: 8px; border-radius: 999px; background: var(--box-3); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--mint); border-radius: inherit; transition: width .4s ease; }
+.total { display: flex; justify-content: space-between; font-weight: 700; font-size: 18px; }
+.total span:last-child { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.note { font-size: 13px; color: var(--mint); background: rgba(185,240,214,.08); border: 1px solid rgba(185,240,214,.25); border-radius: 12px; padding: 10px 12px; }
+
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 60; transform: translate(-50%, 140%); background: var(--ink); color: var(--box); font-weight: 600; font-size: 14px; padding: 10px 18px; border-radius: 999px; transition: transform .3s cubic-bezier(.3,1.4,.5,1); white-space: nowrap; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis; }
+.toast.show { transform: translate(-50%, 0); }
+
+@media (max-width: 980px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  nav.links { display: none; }
+}
+@media (max-width: 820px) {
+  .hero .wrap, .mbox { grid-template-columns: 1fr; }
+  .hero .wrap { padding-block: 36px 40px; }
+  .stage { max-height: 420px; }
+  .guide-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card { padding: 10px 10px 14px; border-radius: 20px; }
+  .specs { grid-template-columns: 1fr; }
+  .card-title { flex-direction: column; gap: 2px; }
+  .cube-zone { min-height: 300px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  * { scroll-behavior: auto !important; }
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Blackbox Squishies home">
+      <span class="logo-cube" aria-hidden="true"><span></span></span>
+      <b>blackbox squishies</b>
+    </a>
+    <nav class="links" aria-label="Sections">
+      <a href="#shop">Shop</a>
+      <a href="#mystery">Mystery box</a>
+      <a href="#guide">Squish guide</a>
+    </nav>
+    <button class="cart-btn" id="openCart" aria-label="Open cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.1a2 2 0 0 1-2 1.9H8.2a2 2 0 0 1-2-1.9z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      Bag <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Slow-rise squishies · packed in black</span>
+        <h1>Squeeze it.<br>Wait for the <em>rise.</em></h1>
+        <p class="lede">Soft, scented, very slow to bounce back. Every squishy we sell is rise-timed by hand and shipped in a matte black box, so opening it is part of the fun.</p>
+        <div class="hero-cta">
+          <a class="btn btn-milk" href="#shop">Shop squishies</a>
+          <a class="btn btn-ghost" href="#mystery">Open a mystery box</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>12</b><span>squishies in stock</span></div>
+          <div><b>4–12 s</b><span>slow-rise range</span></div>
+          <div><b>$35</b><span>free shipping from</span></div>
+        </div>
+      </div>
+      <div class="stage" id="stage">
+        <div class="stage-hint">
+          <span class="chip">Press &amp; hold</span>
+          <span class="chip live" id="riseChip">rise: 8.0 s</span>
+        </div>
+        <div class="hero-squish" id="heroSquish" role="button" tabindex="0" aria-label="Squish Mochi Moon"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker"></div>
+  </div>
+
+  <section class="shop" id="shop">
+    <div class="wrap">
+      <div class="shop-head">
+        <div style="display:grid;gap:10px">
+          <span class="eyebrow">The shelf</span>
+          <h2>Pick your squish</h2>
+        </div>
+        <div class="filters" role="group" aria-label="Filter squishies" id="filters"></div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="mystery" id="mystery">
+    <div class="wrap">
+      <div class="mbox">
+        <div class="mbox-copy">
+          <span class="eyebrow">The namesake</span>
+          <h2>What's in the black box?</h2>
+          <p>One sealed box, one squishy from the whole shelf. You won't know which until you lift the lid. Try a practice opening here first.</p>
+          <div class="odds" aria-label="Mystery box odds">
+            <div><span>Regular squishy</span><b>80%</b></div>
+            <div><span>Jumbo squishy</span><b>15%</b></div>
+            <div><span>Glow-in-the-dark edition</span><b>5%</b></div>
+          </div>
+          <div class="mbox-actions">
+            <button class="btn btn-ghost" id="openBox">Lift the lid</button>
+            <button class="btn btn-milk" id="addMystery">Add mystery box · $10</button>
+          </div>
+        </div>
+        <div class="cube-zone">
+          <div class="cube" id="cube">
+            <div class="reveal" id="reveal"></div>
+            <div class="cube-lid"></div>
+            <div class="cube-body"><span>?</span></div>
+          </div>
+          <div class="reveal-name" id="revealName" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="guide" id="guide">
+    <div class="wrap">
+      <span class="eyebrow">How we rate them</span>
+      <h2>The squish guide</h2>
+      <div class="guide-grid">
+        <div class="guide-item">
+          <h3>Slow-rise time</h3>
+          <p>We squeeze each batch flat and time how long it takes to puff back to full shape. Longer means slower and more satisfying.</p>
+          <div class="scale"><span>4 s quick</span><span>7 s classic</span><span>10 s+ dreamy</span></div>
+        </div>
+        <div class="guide-item">
+          <h3>Softness</h3>
+          <p>Rated 1 to 5 dots. One dot holds its shape for desk display. Five dots melts in your hand like warm dough.</p>
+          <div class="scale"><span><span class="soft"><i class="on"></i><i></i><i></i><i></i><i></i></span></span><span><span class="soft"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div>
+        </div>
+        <div class="guide-item">
+          <h3>Care</h3>
+          <p>Keep them out of direct sun, dust with a dry brush, and dab with baby powder if the surface gets tacky. No water.</p>
+          <div class="scale"><span>PU foam</span><span>Lightly scented</span><span>Ages 3+</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>blackbox squishies</b>
+    <span>Made soft, shipped dark. Demo storefront — checkout isn't connected.</span>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping bag" aria-hidden="true">
+  <div class="drawer-head">
+    <h2>Your bag</h2>
+    <button class="x" id="closeCart" aria-label="Close bag">×</button>
+  </div>
+  <div class="items" id="items"></div>
+  <div class="drawer-foot" id="foot"></div>
+</aside>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  const PRODUCTS = [
+    { id: "mochi-moon",   name: "Mochi Moon",        cat: "Mochi",   shape: "blob",   c1: "#efe6ff", c2: "#d6c6f5", bg: "#2a2438", rise: 8,  soft: 5, size: "7 cm",  price: 9,  tag: "Bestseller" },
+    { id: "peach-bum",    name: "Peach Bum",         cat: "Food",    shape: "peach",  c1: "#ffc7b3", c2: "#ff9f8f", bg: "#352226", rise: 6,  soft: 4, size: "10 cm", price: 12 },
+    { id: "toast-buddy",  name: "Toast Buddy",       cat: "Food",    shape: "toast",  c1: "#ffe4ad", c2: "#d9a35e", bg: "#33291c", rise: 10, soft: 3, size: "12 cm", price: 14, tag: "Scented" },
+    { id: "cat-loaf",     name: "Sleepy Cat Loaf",   cat: "Animals", shape: "cat",    c1: "#f3f0f5", c2: "#c9c0d0", bg: "#25222b", rise: 7,  soft: 4, size: "11 cm", price: 16, sleepy: true },
+    { id: "berry-bun",    name: "Berry Bun",         cat: "Food",    shape: "berry",  c1: "#ff9fb8", c2: "#e86b8d", bg: "#361f29", rise: 5,  soft: 3, size: "9 cm",  price: 11 },
+    { id: "cloud-nap",    name: "Cloud Nap",         cat: "Jumbo",   shape: "cloud",  c1: "#dff1ff", c2: "#a9d3f2", bg: "#1e2834", rise: 12, soft: 5, size: "22 cm", price: 24, tag: "Slowest", sleepy: true },
+    { id: "bear-dumpling",name: "Bear Dumpling",     cat: "Animals", shape: "bear",   c1: "#e9c9a7", c2: "#c49a72", bg: "#2e241d", rise: 6,  soft: 4, size: "9 cm",  price: 13 },
+    { id: "frog-mochi",   name: "Frog Mochi",        cat: "Mochi",   shape: "frog",   c1: "#c8f2c0", c2: "#8fd486", bg: "#1f2c22", rise: 4,  soft: 5, size: "6 cm",  price: 8 },
+    { id: "melon-pan",    name: "Jumbo Melon Pan",   cat: "Jumbo",   shape: "bun",    c1: "#f4f0a8", c2: "#cfc566", bg: "#2c2b1b", rise: 11, soft: 4, size: "20 cm", price: 28, tag: "Jumbo" },
+    { id: "bunny-puff",   name: "Bunny Puff",        cat: "Animals", shape: "bunny",  c1: "#ffe1ee", c2: "#f3b3cf", bg: "#33212c", rise: 9,  soft: 5, size: "13 cm", price: 15, tag: "New" },
+    { id: "dango-trio",   name: "Dango Trio",        cat: "Mochi",   shape: "dango",  c1: "#ffc4d6", c2: "#b8e8c8", bg: "#2a2229", rise: 6,  soft: 4, size: "14 cm", price: 12 },
+    { id: "mochi-ghost",  name: "Mochi Ghost",       cat: "Mochi",   shape: "ghost",  c1: "#f6f6fb", c2: "#cfd0e3", bg: "#22222c", rise: 9,  soft: 5, size: "8 cm",  price: 10, tag: "Glows" }
+  ];
+  const MYSTERY = { id: "mystery", name: "Blackbox Mystery", price: 10 };
+  const byId = Object.fromEntries(PRODUCTS.map(p => [p.id, p]));
+
+  /* ---------- drawing ---------- */
+  function dk(hex, amt) {
+    const n = parseInt(hex.slice(1), 16);
+    const f = v => Math.max(0, Math.min(255, Math.round(v * (1 - amt))));
+    return "#" + [n >> 16, (n >> 8) & 255, n & 255].map(f).map(v => v.toString(16).padStart(2, "0")).join("");
+  }
+  function face(y, sleepy, cx, ch) {
+    cx = cx || 60; ch = ch || 22;
+    const ink = "#3a2632";
+    const eyes = sleepy
+      ? `<path d="M${cx-17} ${y} q5 5 10 0" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M${cx+7} ${y} q5 5 10 0" stroke="${ink}" stroke-width="3" fill="none" stroke-linecap="round"/>`
+      : `<circle cx="${cx-12}" cy="${y}" r="4" fill="${ink}"/><circle cx="${cx+12}" cy="${y}" r="4" fill="${ink}"/><circle cx="${cx-10.6}" cy="${y-1.6}" r="1.3" fill="#fff"/><circle cx="${cx+13.4}" cy="${y-1.6}" r="1.3" fill="#fff"/>`;
+    return eyes +
+      `<path d="M${cx-5} ${y+7} q2.5 3 5 0 q2.5 3 5 0" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>` +
+      `<ellipse cx="${cx-ch}" cy="${y+7}" rx="${ch < 20 ? 3.5 : 6}" ry="${ch < 20 ? 2.4 : 3.6}" fill="#ff7fa8" opacity=".45"/><ellipse cx="${cx+ch}" cy="${y+7}" rx="${ch < 20 ? 3.5 : 6}" ry="${ch < 20 ? 2.4 : 3.6}" fill="#ff7fa8" opacity=".45"/>`;
+  }
+  function art(p) {
+    const a = p.c1, b = p.c2, s = dk(b, .25), st = `stroke="${s}" stroke-width="2.5"`;
+    let body = "", fy = 66;
+    switch (p.shape) {
+      case "blob":
+        body = `<ellipse cx="60" cy="72" rx="44" ry="34" fill="${a}" ${st}/><ellipse cx="44" cy="54" rx="12" ry="6" fill="#fff" opacity=".5"/>`; fy = 70; break;
+      case "peach":
+        body = `<path d="M60 36 C40 14 8 30 18 64 C26 94 48 104 60 104 C72 104 94 94 102 64 C112 30 80 14 60 36Z" fill="${a}" ${st}/><path d="M60 38 C58 60 60 80 60 100" stroke="${b}" stroke-width="2.5" fill="none" opacity=".6"/><ellipse cx="74" cy="22" rx="12" ry="6" fill="#9fd98b" stroke="#6fae5d" stroke-width="2" transform="rotate(-20 74 22)"/>`; fy = 66; break;
+      case "toast":
+        body = `<path d="M20 54 C10 24 46 18 60 28 C74 18 110 24 100 54 L100 96 Q100 106 90 106 L30 106 Q20 106 20 96Z" fill="${b}" ${st}/><path d="M30 56 C24 36 48 32 60 40 C72 32 96 36 90 56 L90 92 Q90 98 84 98 L36 98 Q30 98 30 92Z" fill="${a}"/>`; fy = 68; break;
+      case "cat":
+        body = `<path d="M26 52 L30 24 L50 42 Z M94 52 L90 24 L70 42Z" fill="${a}" ${st} stroke-linejoin="round"/><path d="M33 44 L34 32 L43 41Z M87 44 L86 32 L77 41Z" fill="#ffb3c8"/><rect x="18" y="38" width="84" height="64" rx="30" fill="${a}" ${st}/><path d="M18 76 C30 70 34 60 30 50" stroke="${b}" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>`; fy = 68; break;
+      case "berry":
+        body = `<path d="M60 106 C30 92 14 62 22 46 C30 30 90 30 98 46 C106 62 90 92 60 106Z" fill="${a}" ${st}/>` +
+          [[38,56],[82,56],[46,84],[74,84],[60,96],[30,70],[90,70]].map(([x,y]) => `<ellipse cx="${x}" cy="${y}" rx="1.8" ry="2.6" fill="#ffe08a"/>`).join("") +
+          `<path d="M40 36 L52 30 L60 18 L68 30 L80 36 L66 40 L60 46 L54 40Z" fill="#8fd486" stroke="#5f9e56" stroke-width="2" stroke-linejoin="round"/>`; fy = 64; break;
+      case "cloud":
+        body = `<g fill="${a}" ${st}><circle cx="36" cy="72" r="24"/><circle cx="84" cy="72" r="24"/><circle cx="60" cy="56" r="32"/><rect x="34" y="66" width="52" height="30" rx="12"/></g><g fill="${a}"><circle cx="36" cy="72" r="22.5"/><circle cx="84" cy="72" r="22.5"/><circle cx="60" cy="56" r="30.5"/><rect x="36" y="64" width="48" height="31" rx="11"/></g>`; fy = 68; break;
+      case "bear":
+        body = `<circle cx="30" cy="38" r="14" fill="${a}" ${st}/><circle cx="90" cy="38" r="14" fill="${a}" ${st}/><circle cx="30" cy="38" r="7" fill="${b}"/><circle cx="90" cy="38" r="7" fill="${b}"/><ellipse cx="60" cy="70" rx="42" ry="36" fill="${a}" ${st}/><ellipse cx="60" cy="80" rx="14" ry="10" fill="${dk(a,-.25)}" opacity=".7"/>`; fy = 66; break;
+      case "frog":
+        body = `<circle cx="38" cy="46" r="15" fill="${a}" ${st}/><circle cx="82" cy="46" r="15" fill="${a}" ${st}/><ellipse cx="60" cy="76" rx="46" ry="30" fill="${a}" ${st}/><circle cx="38" cy="46" r="13.5" fill="${a}"/><circle cx="82" cy="46" r="13.5" fill="${a}"/>`;
+        return wrap(body + `<circle cx="38" cy="46" r="5" fill="#3a2632"/><circle cx="82" cy="46" r="5" fill="#3a2632"/><circle cx="39.5" cy="44" r="1.6" fill="#fff"/><circle cx="83.5" cy="44" r="1.6" fill="#fff"/><path d="M50 78 q10 8 20 0" stroke="#3a2632" stroke-width="2.6" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="78" rx="7" ry="4" fill="#ff7fa8" opacity=".45"/><ellipse cx="88" cy="78" rx="7" ry="4" fill="#ff7fa8" opacity=".45"/>`);
+      case "bun":
+        body = `<path d="M12 84 C12 40 36 26 60 26 C84 26 108 40 108 84 Q108 98 94 98 L26 98 Q12 98 12 84Z" fill="${a}" ${st}/><g stroke="${b}" stroke-width="2" opacity=".75"><path d="M30 40 L70 96"/><path d="M50 30 L92 92"/><path d="M90 40 L50 96"/><path d="M70 30 L28 92"/></g>`; fy = 70; break;
+      case "bunny":
+        body = `<ellipse cx="44" cy="34" rx="10" ry="26" fill="${a}" ${st} transform="rotate(-10 44 34)"/><ellipse cx="76" cy="34" rx="10" ry="26" fill="${a}" ${st} transform="rotate(10 76 34)"/><ellipse cx="44" cy="36" rx="4.5" ry="17" fill="${b}" transform="rotate(-10 44 36)"/><ellipse cx="76" cy="36" rx="4.5" ry="17" fill="${b}" transform="rotate(10 76 36)"/><ellipse cx="60" cy="76" rx="42" ry="32" fill="${a}" ${st}/>`; fy = 74; break;
+      case "dango":
+        body = `<rect x="57" y="4" width="6" height="114" rx="3" fill="#d9b27c"/><circle cx="60" cy="28" r="20" fill="${a}" ${st}/><circle cx="60" cy="62" r="20" fill="#fff7ef" ${st}/><circle cx="60" cy="96" r="20" fill="${b}" ${st}/>`;
+        return wrap(body + face(60, false, 60, 15));
+      case "ghost":
+        body = `<path d="M26 104 L26 58 C26 26 94 26 94 58 L94 104 Q85 94 77 104 Q68 94 60 104 Q51 94 43 104 Q34 94 26 104Z" fill="${a}" ${st} stroke-linejoin="round"/><ellipse cx="44" cy="44" rx="9" ry="5" fill="#fff" opacity=".6"/>`; fy = 64; break;
+    }
+    return wrap(body + face(fy, p.sleepy));
+  }
+  function wrap(inner) {
+    return `<svg viewBox="0 0 120 124" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="60" cy="116" rx="36" ry="5" fill="#000" opacity=".25"/>${inner}</svg>`;
+  }
+
+  /* ---------- squish physics (feel, not physics) ---------- */
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function squishable(host, getP, onRise) {
+    let held = false, t0 = 0;
+    const svg = () => host.querySelector("svg");
+    function down(e) {
+      if (e.button > 0) return;
+      held = true; t0 = performance.now();
+      const s = svg(); if (!s) return;
+      s.style.transition = "transform 140ms cubic-bezier(.3,.7,.4,1)";
+      s.style.transform = "scale(1.22, 0.62)";
+      host.style.cursor = "grabbing";
+    }
+    function up() {
+      if (!held) return; held = false;
+      const p = getP(), s = svg(); if (!s) return;
+      const dur = reduce ? 0.3 : Math.max(1.2, p.rise * 0.45);
+      s.style.transition = `transform ${dur}s cubic-bezier(.12,.6,.25,1)`;
+      s.style.transform = "";
+      host.style.cursor = "";
+      onRise && onRise(p, dur);
+    }
+    host.addEventListener("pointerdown", down);
+    window.addEventListener("pointerup", up);
+    host.addEventListener("pointerleave", up);
+    host.addEventListener("pointercancel", up);
+    host.addEventListener("keydown", e => { if ((e.key === " " || e.key === "Enter") && !held) { e.preventDefault(); down({ button: 0 }); } });
+    host.addEventListener("keyup", e => { if (e.key === " " || e.key === "Enter") up(); });
+  }
+
+  /* ---------- hero ---------- */
+  const hero = document.getElementById("heroSquish");
+  const heroP = { ...byId["mochi-moon"] };
+  hero.innerHTML = art(heroP);
+  const chip = document.getElementById("riseChip");
+  let rafId;
+  squishable(hero, () => heroP, (p) => {
+    cancelAnimationFrame(rafId);
+    const start = performance.now(), total = p.rise * 1000 * (reduce ? 0.1 : 0.45);
+    (function tick(now) {
+      const left = Math.max(0, p.rise - ((now - start) / total) * p.rise);
+      chip.textContent = left > 0 ? `rising… ${left.toFixed(1)} s` : `rise: ${p.rise.toFixed(1)} s`;
+      if (left > 0) rafId = requestAnimationFrame(tick);
+    })(start);
+  });
+
+  /* ---------- ticker ---------- */
+  const words = ["Hand-timed slow rise", "Lightly scented", "Packed in matte black", "Free shipping over $35", "Glow editions in mystery boxes", "Soft PU foam"];
+  document.getElementById("ticker").innerHTML = [...words, ...words].map(w => `<span>${w}</span>`).join("");
+
+  /* ---------- shop ---------- */
+  const cats = ["All", "Mochi", "Food", "Animals", "Jumbo"];
+  let filter = "All";
+  try { filter = localStorage.getItem("bbs-filter") || "All"; } catch (e) {}
+  if (!cats.includes(filter)) filter = "All";
+  const filtersEl = document.getElementById("filters");
+  const grid = document.getElementById("grid");
+  function renderFilters() {
+    filtersEl.innerHTML = cats.map(c => `<button class="filter" id="f-${c}" aria-pressed="${c === filter}">${c}</button>`).join("");
+  }
+  function softDots(n) { return `<span class="soft" aria-label="Softness ${n} of 5">${[1,2,3,4,5].map(i => `<i class="${i <= n ? "on" : ""}"></i>`).join("")}</span>`; }
+  function renderGrid() {
+    const list = PRODUCTS.filter(p => filter === "All" || p.cat === filter);
+    grid.innerHTML = list.map(p => `
+      <article class="card">
+        <div class="card-art" data-id="${p.id}" style="background:${p.bg}" role="button" tabindex="0" aria-label="Squish ${p.name}">
+          ${p.tag ? `<span class="tag">${p.tag}</span>` : ""}
+          ${art(p)}
+        </div>
+        <div class="card-body">
+          <div class="card-title"><h3>${p.name}</h3><span class="price">$${p.price.toFixed(2)}</span></div>
+          <dl class="specs">
+            <div><dt>Rise</dt><dd>${p.rise} s</dd></div>
+            <div><dt>Size</dt><dd>${p.size}</dd></div>
+            <div style="grid-column:1/-1"><dt>Softness</dt><dd>${softDots(p.soft)}</dd></div>
+          </dl>
+          <button class="add" id="add-${p.id}" data-add="${p.id}">Add to bag</button>
+        </div>
+      </article>`).join("");
+    grid.querySelectorAll(".card-art").forEach(el => squishable(el, () => byId[el.dataset.id]));
+  }
+  filtersEl.addEventListener("click", e => {
+    const b = e.target.closest(".filter"); if (!b) return;
+    filter = b.textContent;
+    try { localStorage.setItem("bbs-filter", filter); } catch (e) {}
+    renderFilters(); renderGrid();
+  });
+  grid.addEventListener("click", e => {
+    const b = e.target.closest("[data-add]"); if (!b) return;
+    add(b.dataset.add);
+    b.textContent = "Added ✓"; b.classList.add("added");
+    setTimeout(() => { b.textContent = "Add to bag"; b.classList.remove("added"); }, 1200);
+  });
+
+  /* ---------- mystery box ---------- */
+  const cube = document.getElementById("cube"), reveal = document.getElementById("reveal"), revealName = document.getElementById("revealName");
+  const openBtn = document.getElementById("openBox");
+  openBtn.addEventListener("click", () => {
+    if (cube.classList.contains("open")) {
+      cube.classList.remove("open"); revealName.innerHTML = ""; openBtn.textContent = "Lift the lid"; return;
+    }
+    const roll = Math.random();
+    const pool = roll < 0.15 ? PRODUCTS.filter(p => p.cat === "Jumbo") : PRODUCTS.filter(p => p.cat !== "Jumbo");
+    const p = pool[Math.floor(Math.random() * pool.length)];
+    const glow = roll > 0.95;
+    reveal.innerHTML = art(p);
+    reveal.style.filter = glow ? "drop-shadow(0 0 18px #b9f0d6)" : "";
+    cube.classList.add("open");
+    revealName.innerHTML = `${p.name}<small>${glow ? "Glow-in-the-dark edition" : p.cat === "Jumbo" ? "Jumbo pull" : "Regular pull"} · practice opening</small>`;
+    openBtn.textContent = "Close and shake again";
+  });
+  document.getElementById("addMystery").addEventListener("click", () => add("mystery"));
+
+  /* ---------- cart ---------- */
+  let cart = {};
+  try { cart = JSON.parse(localStorage.getItem("bbs-cart") || "{}") || {}; } catch (e) { cart = {}; }
+  const save = () => { try { localStorage.setItem("bbs-cart", JSON.stringify(cart)); } catch (e) {} };
+  const item = id => id === "mystery" ? MYSTERY : byId[id];
+  const countEl = document.getElementById("cartCount");
+  function add(id) {
+    cart[id] = (cart[id] || 0) + 1; save(); renderCart();
+    countEl.classList.remove("bump"); void countEl.offsetWidth; countEl.classList.add("bump");
+    toast(`${item(id).name} added to your bag`);
+  }
+  function mysteryArt() {
+    return `<svg viewBox="0 0 120 124" aria-hidden="true"><rect x="20" y="40" width="80" height="66" rx="14" fill="#0d0b10" stroke="#3a3144" stroke-width="3"/><rect x="14" y="30" width="92" height="18" rx="9" fill="#2a2331" stroke="#3a3144" stroke-width="3"/><text x="60" y="88" text-anchor="middle" font-size="30" font-family="Bagel Fat One, sans-serif" fill="#ffb8d9">?</text></svg>`;
+  }
+  const itemsEl = document.getElementById("items"), footEl = document.getElementById("foot");
+  let checkoutNote = false;
+  function renderCart() {
+    const ids = Object.keys(cart).filter(id => cart[id] > 0 && item(id));
+    const count = ids.reduce((n, id) => n + cart[id], 0);
+    const total = ids.reduce((n, id) => n + cart[id] * item(id).price, 0);
+    countEl.textContent = count;
+    if (!ids.length) {
+      itemsEl.innerHTML = `<div class="empty">${art({ ...byId["mochi-ghost"], sleepy: true })}<b>Your bag is empty</b><span>Add a squishy from the shelf and it will wait here.</span></div>`;
+      footEl.innerHTML = `<a class="btn btn-milk" href="#shop" id="emptyShop" style="justify-content:center">Browse the shelf</a>`;
+      footEl.querySelector("#emptyShop").addEventListener("click", closeCart);
+      return;
+    }
+    itemsEl.innerHTML = ids.map(id => {
+      const p = item(id);
+      return `<div class="line">
+        <div class="line-art" style="background:${p.bg || "#000"}">${id === "mystery" ? mysteryArt() : art(p)}</div>
+        <div class="line-info"><b>${p.name}</b>
+          <div class="qty"><button data-dec="${id}" aria-label="One fewer ${p.name}">−</button><span>${cart[id]}</span><button data-inc="${id}" aria-label="One more ${p.name}">+</button></div>
+        </div>
+        <span class="price">$${(p.price * cart[id]).toFixed(2)}</span>
+      </div>`;
+    }).join("");
+    const left = Math.max(0, 35 - total);
+    footEl.innerHTML = `
+      <div class="ship"><span>${left > 0 ? `Add $${left.toFixed(2)} more for free shipping` : "Free shipping unlocked"}</span><div class="bar"><i style="width:${Math.min(100, total / 35 * 100)}%"></i></div></div>
+      <div class="total"><span>Subtotal</span><span>$${total.toFixed(2)}</span></div>
+      ${checkoutNote ? `<div class="note">This is a demo storefront, so checkout isn't connected to payments yet. Your bag is saved in this browser.</div>` : ""}
+      <button class="btn btn-milk" id="checkout" style="justify-content:center">Check out</button>`;
+    footEl.querySelector("#checkout").addEventListener("click", () => { checkoutNote = true; renderCart(); });
+  }
+  itemsEl.addEventListener("click", e => {
+    const inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]");
+    if (inc) cart[inc.dataset.inc]++;
+    else if (dec) { const id = dec.dataset.dec; cart[id]--; if (cart[id] <= 0) delete cart[id]; }
+    else return;
+    save(); renderCart();
+  });
+  const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
+  function openCart() { drawer.classList.add("show"); scrim.classList.add("show"); drawer.setAttribute("aria-hidden", "false"); document.getElementById("closeCart").focus(); }
+  function closeCart() { drawer.classList.remove("show"); scrim.classList.remove("show"); drawer.setAttribute("aria-hidden", "true"); checkoutNote = false; renderCart(); }
+  document.getElementById("openCart").addEventListener("click", openCart);
+  document.getElementById("closeCart").addEventListener("click", closeCart);
+  scrim.addEventListener("click", closeCart);
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && drawer.classList.contains("show")) closeCart(); });
+
+  const toastEl = document.getElementById("toast"); let tt;
+  function toast(msg) { toastEl.textContent = msg; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(() => toastEl.classList.remove("show"), 1800); }
+
+  renderFilters(); renderGrid(); renderCart();
+})();
+</script>
+</body>
+</html>
